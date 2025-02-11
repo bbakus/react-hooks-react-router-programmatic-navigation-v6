@@ -1,6 +1,12 @@
+
+
+// Login.js
 import { useState } from "react";
+import { useOutletContext } from "react-router-dom";
 
 function Login() {
+  // Access the login function passed as context
+  const login = useOutletContext();
   const [formData, setFormData] = useState({
     username: "",
     password: "",
@@ -11,11 +17,13 @@ function Login() {
       ...formData,
       [e.target.name]: e.target.value,
     });
-  }
+  };
 
+  // Create a function that calls the login function when the form is submitted
   function handleLogin(e) {
     e.preventDefault();
-  }
+    login();
+  };
 
   return (
     <form onSubmit={handleLogin}>
@@ -40,8 +48,9 @@ function Login() {
         />      
       </div>
       <button type="submit">Login</button>
-    </form>
+  </form>
   );
-}
+};
 
 export default Login;
+
